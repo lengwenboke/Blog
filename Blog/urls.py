@@ -21,6 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'mdeditor/', include('mdeditor.urls')),
+    url(r'', include('blogpost.urls')),
 ]
 
 if settings.DEBUG:
