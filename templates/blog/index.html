@@ -1,5 +1,8 @@
 ﻿{% extends 'base.html' %}
 {% load staticfiles %}
+{% block title %}
+    首页
+{% endblock title %}
 {% block broadcast %}
     <div class="carousel-inner" role="listbox">
         <div class="item active"><a href="content.html" target="_blank"><img
@@ -52,7 +55,7 @@
                             src="{% static 'images/logo.jpg' %}" alt=""> </a></div>
                     <div class="news-info col-xs-7 col-sm-7 col-md-8">
                         <dl>
-                            <dt><a href="" target="_blank"> {{ post.title }} </a></dt>
+                            <dt><a href="{% url 'blog:detail' post.pk %}" target="_blank"> {{ post.title }} </a></dt>
                             <dd><span class="name"><a href="" title="由 {{ post.author }} 发布" rel="author"
                             >{{ post.author }}</a></span>
                                 <span class="identity"></span> <span class="time"> {{ post.created_time }} </span></dd>

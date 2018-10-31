@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load  staticfiles %}
+{% block title %}
+    {{ post.title }}
+{% endblock title %}
+
+{% block style %}
+    <link href="{% static '/mdeditor/css/editormd.min.css' %}" rel="stylesheet">
+    <link href="{% static '/mdeditor/css/editormd.preview.css' %}" rel="stylesheet">
+{% endblock style %}
+
+{% block main %}
+
+
+
+    <header class="news_header">
+        <h2>{{ post.title }}</h2>
+        <ul>
+            <li>{{ post.author }} 发布于 {{ post.created_time }}</li>
+            <li>栏目：<a href="" title="" target="_blank">{{ post.category.navigation.name }}</a></li>
+            <li>来源：<a href="" title="" target="_blank">互联网</a></li>
+            <li>浏览量：<strong>2345</strong></li>
+        </ul>
+    </header>
+    <article class="news_content">
+        <div>
+            <div id="content"><textarea>{{ post.body }}</textarea></div>
+        </div>
+    </article>
+    <div class="reprint">转载请说明出处：<a href="{% url 'blog:index' %}" title="" target="_blank">冷文博客</a> » <a href="
+{% url 'blog:detail' post.pk %}"
+                                                                                                         title=""
+                                                                                                         target="_blank">{{ post.title }}</a>
+    </div>
+    <div class="zambia">
+        <a href="javascript:;" name="zambia" rel="">
+            <span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）
+        </a>
+    </div>
+    <div class="tags news_tags">
+        标签：
+        {% for tag in post.tags.all %}
+            <span data-toggle="tooltip" data-placement="bottom" title="查看关于 {{ tag.name }} 的文章">
+                <a href="">{{ tag.name }}</a>
+            </span>
+        {% endfor %}
+    </div>
+    <nav class="page-nav"> <span class="page-nav-prev">上一篇<br/>
+        <a href="" rel="prev">欢迎来到个人技术博客</a></span> <span class="page-nav-next">下一篇<br/>
+        <a href="" rel="next">欢迎来到个人技术博客</a></span></nav>
+    <div class="content-block related-content visible-lg visible-md">
+        <h2 class="title"><strong>相关推荐</strong></h2>
+        <ul>
+            <li><a target="_blank" href=""><img src="{% static 'images/logo.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/img1.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/img3.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/img2.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/img2.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/img3.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/img1.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+            <li><a target="_blank" href=""><img src="{% static 'images/logo.jpg' %}" alt="">
+                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
+            </a></li>
+        </ul>
+    </div>
+    <div class="content-block comment">
+        <h2 class="title"><strong>评论</strong></h2>
+        <form action="comment.php" method="post" class="form-inline" id="comment-form">
+            <div class="comment-title">
+                <div class="form-group">
+                    <label for="commentName">昵称：</label>
+                    <input type="text" name="commentName" class="form-control" id="commentName"
+                           placeholder="技术博客">
+                </div>
+                <div class="form-group">
+                    <label for="commentEmail">邮箱：</label>
+                    <input type="email" name="commentEmail" class="form-control" id="commentEmail"
+                           placeholder="admin@xxxx.com">
+                </div>
+            </div>
+            <div class="comment-form">
+                <textarea placeholder="你的评论可以一针见血" name="commentContent"></textarea>
+                <div class="comment-form-footer">
+                    <div class="comment-form-text">请先 <a href="javascript:;">登录</a> 或 <a
+                            href="javascript:;">注册</a>，也可匿名评论
+                    </div>
+                    <div class="comment-form-btn">
+                        <button type="submit" class="btn btn-default btn-comment">提交评论</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="comment-content">
+            <ul>
+                <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span
+                        class="text"><strong>技术博客站长</strong> (2015-10-18) 说：<br/>
+              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span></li>
+                <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span
+                        class="text"><strong>技术博客编辑</strong> (2015-10-18) 说：<br/>
+              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 ...</span></li>
+                <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span
+                        class="text"><strong>令狐冲</strong> (2015-10-18) 说：<br/>
+              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span>
+                </li>
+                <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span
+                        class="text"><strong>任盈盈</strong> (2015-10-18) 说：<br/>
+              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等在这里可以看到网站前端和后端的技术等 ...</span>
+                </li>
+                <li><span class="face"><img src="images/icon/icon.png" alt=""></span> <span
+                        class="text"><strong>技术博客站长</strong> (2015-10-18) 说：<br/>
+              欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 ...</span></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+{% endblock main %}
+
+{% block script %}
+    <script src="{% static '/mdeditor/js/editormd.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/marked.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/prettify.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/raphael.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/underscore.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/sequence-diagram.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/flowchart.min.js' %}"></script>
+    <script src="{% static '/mdeditor/js/lib/jquery.flowchart.min.js' %}"></script>
+    <script>
+        $(function () {
+            // js 解析markdown
+            editormd.markdownToHTML("content", {
+                //htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                emoji: true,
+                taskList: true,
+                tex: true,  // 默认不解析
+                flowChart: true,  // 默认不解析
+                sequenceDiagram: true,  // 默认不解析
+            });
+            $(".reference-link").each(function (i, obj) {
+                console.log(obj)
+            })
+        })
+    </script>
+
+{% endblock script %}
