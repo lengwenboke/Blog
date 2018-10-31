@@ -1,0 +1,49 @@
+﻿{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}
+    首页
+{% endblock title %}
+
+{% block main %}
+    <div class="content-block new-content">
+        <h2 class="title"><strong>筛选结果</strong></h2>
+        <div class="row">
+            {% for post in post_list %}
+                <div class="news-list">
+                    <div class="news-img col-xs-5 col-sm-5 col-md-4"><a target="_blank" href=""><img
+                            src="/uploads/{{ post.img }}" alt=""> </a></div>
+                    <div class="news-info col-xs-7 col-sm-7 col-md-8">
+                        <dl>
+                            <dt><a href="{% url 'blog:detail' post.pk %}" target="_blank"> {{ post.title }} </a></dt>
+                            <dd><span class="name"><a href="" title="由 {{ post.author }} 发布" rel="author"
+                            >{{ post.author }}</a></span>
+                                <span class="identity"></span> <span class="time"> {{ post.created_time }} </span></dd>
+                            <dd class="text">
+                                {{ post.excerpt }}
+                            </dd>
+                        </dl>
+                        <div class="news_bot col-sm-7 col-md-8">
+                        <span class="tags visible-lg visible-md">
+                            {% for tag in post.tags.all %}
+                                <a href="">{{ tag.name }}</a>
+                            {% endfor %}
+                        </span>
+                            <span
+                                    class="look"> 共 <strong>{{ post.view }}</strong> 人围观
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+
+            {% endfor %}
+        </div>
+
+        <!--<div class="news-more" id="pagination">
+            <a href="">查看更多</a>
+        </div>-->
+        <div class="quotes" style="margin-top:15px"><span class="disabled">首页</span><span
+                class="disabled">上一页</span><span class="current">1</span><a href="">2</a><a href="">下一页</a><a
+                href="">尾页</a></div>
+    </div>
+{% endblock main %}

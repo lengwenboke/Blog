@@ -8,7 +8,8 @@ from .views import *
 
 app_name = 'blog'
 urlpatterns = [
-                  url(r'^$', IndexView.as_view(), name="index"),
-                  url(r'^post/(?P<pk>[0-9]+)/$', PostDetailView.as_view(), name="detail"),
-                  # url(r'^uploads/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
-              ]
+    url(r'^$', IndexView.as_view(), name="index"),
+    url(r'^post/(?P<pk>[0-9]+)/$', PostDetailView.as_view(), name="detail"),
+    url(r'^category/(?P<pk>[0-9]+)/$', CategoryView.as_view(), name='category'),
+    url(r'^navigation/(?P<pk>[0-9]+)/$', NavigationView.as_view(), name='navigation')
+]

@@ -47,10 +47,11 @@
                 {% get_navigations as navi_list %}
                 {% for navi in navi_list %}
                     <li>
-                        <a href=""><span class="glyphicon glyphicon-th-list"></span>{{ navi.name }}</a>
+                        <a href="{% url 'blog:navigation' navi.pk %}"><span class="glyphicon glyphicon-th-list"></span
+                        >{{ navi.name }}</a>
                         <ul class="nav" style="width:80%;text-align: right" hidden="hidden">
                             {% for cate in navi.category_set.all %}
-                                <li><a href="#">●{{ cate.name }}</a></li>
+                                <li><a href="{% url 'blog:category' cate.pk %}">●{{ cate.name }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
@@ -75,20 +76,21 @@
                         class="glyphicon glyphicon-menu-hamburger"></span></button>
             </div>
             <div id="header-xs-menu" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav header-xs-nav">
-                    <li class="active"><a href="{% url 'blog:index' %}"><span class="glyphicon
-                    glyphicon-home"></span>网站首页</a></li>
-                    <li>
-                        <a href=""><span class="glyphicon glyphicon-erase"></span>网站前端</a>
-                        <ul class="nav" style="width:80%;text-align: right" hidden="hidden">
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a href=""><span class="glyphicon glyphicon-inbox"></span>后端技术</a></li>
-                    <li><a href=""><span class="glyphicon glyphicon-globe"></span>管理系统</a></li>
+                <ul class="nav hidden-xs-nav my_blog_menu">
+                    <li class="active"><a href="{% url 'blog:index' %}"><span
+                            class="glyphicon glyphicon-home"></span>网站首页</a></li>
+                    {% get_navigations as navi_list %}
+                    {% for navi in navi_list %}
+                        <li>
+                            <a href="{% url 'blog:navigation' navi.pk %}"><span
+                                    class="glyphicon glyphicon-th-list"></span>{{ navi.name }}</a>
+                            <ul class="nav" style="width:80%;text-align: right" hidden="hidden">
+                                {% for cate in navi.category_set.all %}
+                                    <li><a href="{% url 'blog:category' cate.pk %}">●{{ cate.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endfor %}
                     <li><a href="about.html"><span class="glyphicon glyphicon-user"></span>关于我们</a></li>
                     <li><a href="friendly.html"><span class="glyphicon glyphicon-tags"></span>友情链接</a></li>
                 </ul>
