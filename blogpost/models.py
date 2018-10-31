@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.urls import reverse
 from django.utils.html import strip_tags
 from mdeditor.fields import MDTextField
 
@@ -119,3 +120,6 @@ class Post(models.Model):
             self.img = 'images/logo.jpg'
 
         super(Post, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', kwargs={'pk': self.pk})

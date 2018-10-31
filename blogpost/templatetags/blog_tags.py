@@ -1,3 +1,4 @@
+from comments.models import Comment
 from ..models import *
 from django import template
 
@@ -12,3 +13,8 @@ def get_host_post(num=5):
 @register.simple_tag
 def get_navigations():
     return Navigation.objects.all()
+
+
+@register.simple_tag
+def get_recent_comment(num=5):
+    return Comment.objects.all()[:num]

@@ -16,6 +16,9 @@ class PostAdmin(admin.ModelAdmin):
 
     search_fields = ['title', 'body', ]
 
+    list_filter = ('title', 'category', 'tags', 'author')
+    filter_horizontal = ('tags',)
+
 
 admin.site.site_header = "冷文博客后台管理"
 admin.site.site_title = "冷文博客"
