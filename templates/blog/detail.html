@@ -19,7 +19,7 @@
             <li>{{ post.author }} 发布于 {{ post.created_time }}</li>
             <li>栏目：<a href="" title="" target="_blank">{{ post.category.navigation.name }}</a></li>
             <li>来源：<a href="" title="" target="_blank">互联网</a></li>
-            <li>浏览量：<strong>2345</strong></li>
+            <li>浏览量：<strong>{{ post.view }}</strong></li>
         </ul>
     </header>
     <article class="news_content">

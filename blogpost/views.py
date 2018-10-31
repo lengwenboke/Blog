@@ -17,6 +17,11 @@ class PostDetailView(DetailView):
     template_name = 'blog/detail.html'
     context_object_name = 'post'
 
+    def get(self, request, *args, **kwargs):
+        response = super(PostDetailView, self).get(request, *args, **kwargs)
+        self.object.increase_view()
+        return response
+
     def get_object(self, queryset=None):
         post = super(PostDetailView, self).get_object(queryset=queryset)
         return post

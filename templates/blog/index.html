@@ -3,6 +3,7 @@
 {% block title %}
     首页
 {% endblock title %}
+
 {% block broadcast %}
     <div class="carousel-inner" role="listbox">
         <div class="item active"><a href="content.html" target="_blank"><img
@@ -52,7 +53,7 @@
             {% for post in post_list %}
                 <div class="news-list">
                     <div class="news-img col-xs-5 col-sm-5 col-md-4"><a target="_blank" href=""><img
-                            src="{% static 'images/logo.jpg' %}" alt=""> </a></div>
+                            src="/uploads/{{ post.img }}" alt=""> </a></div>
                     <div class="news-info col-xs-7 col-sm-7 col-md-8">
                         <dl>
                             <dt><a href="{% url 'blog:detail' post.pk %}" target="_blank"> {{ post.title }} </a></dt>
@@ -70,7 +71,7 @@
                             {% endfor %}
                         </span>
                             <span
-                                    class="look"> 共 <strong>2126</strong> 人围观，发现 <strong> 12 </strong> 个不明物体
+                                    class="look"> 共 <strong>{{ post.view }}</strong> 人围观
                             </span>
                         </div>
                     </div>

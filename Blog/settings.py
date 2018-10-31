@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blogpost',  # 博客应用
     'mdeditor',  # markdown
+    'comments',  # 评论系统
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'blog_tags': 'blogpost.templatetags.blog_tags'
+            }
         },
     },
 ]
@@ -120,4 +124,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = '/media/'
+MEDIA_URL = '/uploads/'
