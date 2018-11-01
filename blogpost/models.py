@@ -33,7 +33,7 @@ class Category(models.Model):
     name = models.CharField(max_length=16)
 
     # 父级导航栏
-    navigation = models.ForeignKey(Navigation)
+    navigation = models.ForeignKey(Navigation, on_delete=True)
 
     def __str__(self):
         return self.name
@@ -82,13 +82,13 @@ class Post(models.Model):
     modified_time = models.DateTimeField(blank=True, verbose_name="修改时间")
 
     # 文章所属分类(多对一)
-    category = models.ForeignKey(Category, verbose_name="分类")
+    category = models.ForeignKey(Category, verbose_name="分类", on_delete=True)
 
     # 文章标签(多对的)
     tags = models.ManyToManyField(Tag, verbose_name="标签")
 
     # 作者(多对一)
-    author = models.ForeignKey(User, verbose_name="作者")
+    author = models.ForeignKey(User, verbose_name="作者", on_delete=True)
 
     # 阅读量
     view = models.PositiveIntegerField(default=0, verbose_name="阅读量")
@@ -124,3 +124,32 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'pk': self.pk})
 
+
+class DailySentence(models.Model):
+    created_time = models.DateField(auto_now_add=True, verbose_name="创建时间")
+    content = models.TextField(verbose_name='内容')
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        ordering = ['-pk']
+        verbose_name = u"每日一句"
+        verbose_name_plural = u"每日一句"
+
+
+class Broadcast(models.Model):
+    image = models.ImageField(upload_to='images', verbose_name="图片")
+    content = models.TextField(verbose_name='内容')
+    post = models.ForeignKey(Post, verbose_name='文章详情', on_delete=True)
+    modified_time = models.DateTimeField(blank=True, null=True, verbose_name='修改时间')
+    is_activate = models.BooleanField(default=False, verbose_name='第一张')
+
+    def save(self, *args, **kwargs):
+        self.modified_time = datetime.datetime.now()
+        super(Broadcast, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-modified_time']
+        verbose_name = u'轮播图'
+        verbose_name_plural = u'轮播图'

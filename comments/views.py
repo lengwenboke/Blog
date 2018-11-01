@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 # Create your views here.
 
 from blogpost.models import Post
-from comments.forms import CommentForm, LsmgForm, Lmsg
+from comments.forms import CommentForm, LsmgForm, Lmsg, FriendlyForm
+from comments.models import Friendly
 
 
 def post_comment(request, post_pk):
@@ -27,8 +28,24 @@ def post_comment(request, post_pk):
     return redirect(post)
 
 
+def friendly_url(request):
+    form = FriendlyForm()
+    if request.method == 'POST':
+        form = FriendlyForm(request.POST)
+        if form.is_valid():
+            friendly = form.save(commit=False)
+            friendly.save()
+            return redirect('comments:friendly')
+    friendly_list = Friendly.objects.all()
+    context = {
+        'form': form,
+        'friendly_list': friendly_list,
+    }
+    return render(request, 'blog/friendly.html', context=context)
+
+
 def reader_lmsg(request):
-    print(request)
+    # print(request)
     form = LsmgForm()
     if request.method == 'POST':
         form = LsmgForm(request.POST)

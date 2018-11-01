@@ -1,4 +1,6 @@
-from django.db.models import Count
+from datetime import timedelta
+
+from django.db.models import Count, Q
 
 from comments.models import Comment
 from ..models import *
@@ -23,5 +25,29 @@ def get_recent_comment(num=5):
 
 
 @register.simple_tag
-def get_tags():
-    return Tag.objects.annotate(num_posts=Count('post')).filter(num_posts_gt=0)
+def get_dailySentence():
+    return DailySentence.objects.all().first()
+
+
+@register.simple_tag
+def get_broadcast():
+    return Broadcast.objects.all()
+
+
+# @register.simple_tag
+# def get_host_week():
+#     dt_s = datetime.datetime.now().date()
+#     dt_e = (dt_s - timedelta(7))
+#     post_list = Post.objects.filter(Q(modified_time=dt_s) & Q(modified_time=dt_e)).all().order_by(
+#         '-modified_time').order_by('-view')[1:5]
+#
+#     return post_list
+#
+#
+# @register.simple_tag
+# def get_host_week_first():
+#     dt_s = datetime.datetime.now().date()
+#     dt_e = (dt_s - timedelta(7))
+#     post = Post.objects.filter(Q(modified_time=dt_s) & Q(modified_time=dt_e)).all().order_by(
+#         '-modified_time').order_by('-view').first()
+#     return post

@@ -57,7 +57,7 @@
                     </li>
                 {% endfor %}
                 <li><a href="about.html"><span class="glyphicon glyphicon-user"></span>关于我们</a></li>
-                <li><a href="friendly.html"><span class="glyphicon glyphicon-tags"></span>友情链接</a></li>
+                <li><a href="{% url 'comments:friendly' %}"><span class="glyphicon glyphicon-tags"></span>友情链接</a></li>
             </ul>
             <div class="feeds">
                 <a class="feed feed-xlweibo" href="https://weibo.com/lengwenboke" target="_blank">
@@ -144,14 +144,15 @@
     <!--/内容-->
     <aside class="sidebar visible-lg"><!--右侧>992px显示-->
         <div class="sentence"><strong>每日一句</strong>
-            <h2>2015年11月1日 星期日</h2>
-            <p>你是我人生中唯一的主角，我却只能是你故事中的一晃而过得路人甲。</p>
+            {% get_dailySentence as daily %}
+            <h2>{{ daily.created_time }}</h2>
+            <p>{{ daily.content }}</p>
         </div>
         <div id="search" class="sidebar-block search" role="search">
             <h2 class="title"><strong>搜索</strong></h2>
-            <form class="navbar-form" action="search.php" method="post">
+            <form class="navbar-form" action="/search/" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" size="35" placeholder="请输入关键字">
+                    <input type="text" class="form-control" name="q" size="35" placeholder="请输入关键字">
                     <span class="input-group-btn">
           <button class="btn btn-default btn-search" type="submit">搜索</button>
           </span></div>
@@ -184,7 +185,7 @@
                     <li data-toggle="tooltip" data-placement="top" title="{{ comm.name }}的评论"><a target="_blank"
                                                                                                  href="
 {% url 'blog:detail' comm.post.pk %}"><span
-                            class="face"><img src="{% static 'images/icon/icon.png' %}" alt=""></span> <span
+                            class="face"></span> <span
                             class="text"><strong>{{ comm.name }}</strong> ({{ comm.created_time }}) 说：<br/>
                         {{ comm.text }}</span></a></li>
                 {% endfor %}

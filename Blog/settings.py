@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'blogpost',  # 博客应用
     'mdeditor',  # markdown
     'comments',  # 评论系统
+    'haystack',  # 分页
 ]
 
 MIDDLEWARE = [
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'dj_pagination.middleware.PaginationMiddleware'
 ]
 
 ROOT_URLCONF = 'Blog.urls'
@@ -63,6 +65,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # ("django.core.context_processors.auth",
+                #  "django.core.context_processors.debug",
+                #  "django.core.context_processors.i18n",
+                #  "django.core.context_processors.media",
+                #  "django.core.context_processors.request")
             ],
             'libraries': {
                 'blog_tags': 'blogpost.templatetags.blog_tags'
@@ -125,3 +132,13 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'blogpost.whoosh_cn_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+
+# 添加此项，当数据库改变时，会自动更新索引，非常方便
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

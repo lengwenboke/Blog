@@ -15,7 +15,7 @@ class Comment(models.Model):
 
     author_reply = models.TextField(blank=True, verbose_name="作者回复")
 
-    post = models.ForeignKey(Post, verbose_name="文章")
+    post = models.ForeignKey(Post, verbose_name="文章", on_delete=True)
 
     class Meta:
         ordering = ['-created_time']
