@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from comments.models import Comment
+from comments.models import Comment, Friendly
 
 
 class CommentAdmin(admin.ModelAdmin):
@@ -11,4 +11,9 @@ class CommentAdmin(admin.ModelAdmin):
     fields = ('name', 'email', 'post', 'created_time', ('text', 'author_reply'))
 
 
+class FriendlyAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Friendly, FriendlyAdmin)

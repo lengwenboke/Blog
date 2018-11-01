@@ -1,3 +1,5 @@
+from django.db.models import Count
+
 from comments.models import Comment
 from ..models import *
 from django import template
@@ -18,3 +20,8 @@ def get_navigations():
 @register.simple_tag
 def get_recent_comment(num=5):
     return Comment.objects.all()[:num]
+
+
+@register.simple_tag
+def get_tags():
+    return Tag.objects.annotate(num_posts=Count('post')).filter(num_posts_gt=0)

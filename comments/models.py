@@ -33,3 +33,19 @@ class Lmsg(models.Model):
         ordering = ['-created_time']
         verbose_name = u"留言"
         verbose_name_plural = u"留言"
+
+
+class Friendly(models.Model):
+    title = models.CharField(max_length=128, verbose_name='网站名称')
+    weburl = models.URLField(max_length=128, verbose_name='网站URL')
+    email = models.EmailField(max_length=128, verbose_name='联系邮箱')
+    desc = models.TextField(verbose_name='网站说明')
+    reason = models.TextField(verbose_name='理由')
+    created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    modified_time = models.DateTimeField(blank=True, verbose_name='变更时间')
+    flag = models.BooleanField(default=False, verbose_name='验证')
+
+    class Meta:
+        ordering = ['-created_time']
+        verbose_name = u"友情链接"
+        verbose_name_plural = u"友情链接"

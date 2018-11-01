@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}
+    留言
+{% endblock title %}
+
+{% block main %}
+    <div class="content-block comment">
+        <h2 class="title"><strong>评论</strong></h2>
+        <form action="{% url 'comments:lmsg' %}" method="post" class="form-inline" id="comment-form">
+            {% csrf_token %}
+            <div class="comment-title">
+                <div class="form-group">
+                    <label for="commentName">昵称：</label>
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </div>
+                <div class="form-group">
+                    <label for="commentEmail">邮箱：</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+            </div>
+            <div class="comment-form">
+                {{ form.text }}
+                {{ form.text.errors }}
+                <div class="comment-form-footer">
+                    <div class="comment-form-btn">
+                        <button type="submit" class="btn btn-default btn-comment">提交评论</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="comment-content">
+            <ul>
+                {% for comment in lmsg_list %}
+                    <li>
+                        {#                        <span class="face">#}
+                        {#                            <img src="{% static 'images/icon/icon.png' %}" alt="">#}
+                        {#                        </span>#}
+                        <span class="text">
+                            <strong>{{ comment.name }}</strong> ({{ comment.created_time }}) 说：<br/>
+                            {{ comment.text }}
+                            {% if comment.author_reply %}
+                                <span class="text">
+                                <strong>作者回复</strong> 说：{{ comment.author_reply }}
+
+                            </span>
+                            {% endif %}
+
+                        </span>
+                    </li>
+                {% empty %}
+                    <li><span class="face"><strong>暂无留言！</strong></span></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock main %}

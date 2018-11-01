@@ -77,7 +77,9 @@
                     <i></i>微信打赏
                 </a>
             </div>
-            <div class="wall"><a href="readerWall.html" target="_blank">读者墙</a> | <a href="tags.html" target="_blank">标签云</a>
+            <div class="wall"><a href="{% url 'comments:lmsg' %}" target="_blank">留言板</a> | <a
+                    href="{% url 'blog:tags' %}"
+                    target="_blank">标签云</a>
             </div>
         </div>
         <!--/超小屏幕不显示-->

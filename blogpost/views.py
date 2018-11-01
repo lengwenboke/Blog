@@ -21,6 +21,13 @@ class CategoryView(IndexView):
         return super(CategoryView, self).get_queryset().filter(category=cate)
 
 
+class TagsFilterView(CategoryView):
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
+        return  tag.post_set.all()
+
+
 class NavigationView(CategoryView):
     model = Navigation
     context_object_name = 'navigation'
@@ -44,13 +51,13 @@ class NavigationView(CategoryView):
         return context
 
 
-
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/detail.html'
     context_object_name = 'post'
 
     def get(self, request, *args, **kwargs):
+        self.this_pk = kwargs.get('pk')
         response = super(PostDetailView, self).get(request, *args, **kwargs)
         self.object.increase_view()
         return response
@@ -61,12 +68,45 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
+        category = self.object.category
+
+        post_list = Post.objects.filter(category=category).order_by('id').all()
+
+        prev_post = None
+        next_post = None
+        post_count = len(post_list)
+
+        post_index = 0
+        for i in range(post_count):
+            if post_list[i].pk == self.object.pk:
+                post_index = i
+
+        if not post_index == 0:
+            prev_post = post_index - 1
+        if not post_index == post_count - 1:
+            next_post = post_index + 1
+
+        # print(post_index, prev_post, next_post)
+
+        if not prev_post == None:
+            prev_post = post_list[prev_post]
+        if not next_post == None:
+            next_post = post_list[next_post]
+
         form = CommentForm()
         comment_list = self.object.comment_set.all()
         context.update(
             {
                 'form': form,
                 'comment_list': comment_list,
+                'next_post': next_post,
+                'prev_post': prev_post,
             }
         )
         return context
+
+
+class TagsView(ListView):
+    model = Tag
+    template_name = 'blog/tags.html'
+    context_object_name = 'tags'
