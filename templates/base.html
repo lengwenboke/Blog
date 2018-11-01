@@ -150,7 +150,7 @@
         </div>
         <div id="search" class="sidebar-block search" role="search">
             <h2 class="title"><strong>搜索</strong></h2>
-            <form class="navbar-form" action="/search/" method="get">
+            <form class="navbar-form" action="{% url 'blog:search' %}" method="get">
                 <div class="input-group">
                     <input type="text" class="form-control" name="q" size="35" placeholder="请输入关键字">
                     <span class="input-group-btn">

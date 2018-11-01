@@ -1,0 +1,62 @@
+﻿{% extends 'base.html' %}
+{% load staticfiles %}
+{% load highlight %}
+{% block title %}
+    首页
+{% endblock title %}
+
+{% block main %}
+    <div class="content-block new-content">
+        <h2 class="title"><strong>筛选结果</strong></h2>
+        <div class="row">
+            {% if query %}
+                {% for result in page.object_list %}
+                    <div class="news-list">
+                        <div class="news-img col-xs-5 col-sm-5 col-md-4"><a target="_blank" href=""><img
+                                src="/uploads/{{ result.object.img }}" alt=""> </a></div>
+                        <div class="news-info col-xs-7 col-sm-7 col-md-8">
+                            <dl>
+                                <dt><a href="{% url 'blog:detail' result.object.pk %}"
+                                       target="_blank"> {% highlight result.object.title with query %} </a>
+                                </dt>
+                                <dd><span class="name"><a href="" title="由 {{ result.object.author }} 发布" rel="author"
+                                >{{ result.object.author }}</a></span>
+                                    <span class="identity"></span> <span
+                                            class="time"> {{ result.object.created_time }} </span>
+                                </dd>
+                                <dd class="text">
+                                    {% highlight result.object.excerpt with query %}
+                                </dd>
+                            </dl>
+                            <div class="news_bot col-sm-7 col-md-8">
+                        <span class="tags visible-lg visible-md">
+                            {% for tag in result.object.tags.all %}
+                                <a href="">{{ tag.name }}</a>
+                            {% endfor %}
+                        </span>
+                                <span
+                                        class="look"> 共 <strong>{{ result.object.view }}</strong> 人围观
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!--<div class="news-more" id="pagination">
+            <a href="">查看更多</a>
+        </div>-->
+        <div class="quotes" style="margin-top:15px">
+            {% if page.has_previous or page.has_next %}
+                <div>
+                    {% if page.has_previous %}<a href="?q={{ query }}&page={{ page.previous_page_number }}">{% endif %}«
+                    Previous{% if page.has_previous %}</a>{% endif %}
+                    |
+                    {% if page.has_next %}<a href="?q={{ query }}&page={{ page.next_page_number }}">{% endif %}Next »
+                    {% if page.has_next %}</a>{% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock main %}

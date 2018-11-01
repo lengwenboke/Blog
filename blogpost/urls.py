@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^navigation/(?P<pk>[0-9]+)/$', NavigationView.as_view(), name='navigation'),
     url(r'^tags/$', TagsView.as_view(), name='tags'),
     url(r'^tagsfilter/(?P<pk>[0-9]+)/$', TagsFilterView.as_view(), name='tagsfilter'),
+    url(r'^search/$', PostSearchView(), name='search'),
 ]

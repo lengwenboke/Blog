@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from haystack.views import SearchView
 
 from blogpost.models import *
 from comments.forms import CommentForm
@@ -236,3 +237,7 @@ class TagsView(ListView):
     model = Tag
     template_name = 'blog/tags.html'
     context_object_name = 'tags'
+
+
+class PostSearchView(SearchView):
+    template = 'blog/search.html'
