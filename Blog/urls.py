@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.views.static import serve
 
 from Blog.settings import MEDIA_ROOT
+from blogpost.feed import AllPostsRssFeed
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,6 +28,7 @@ urlpatterns = [
     url(r'', include('blogpost.urls')),
     url(r'', include('comments.urls')),
     # url(r'^search/', include('haystack.urls')),
+    url(r'^all/rss$', AllPostsRssFeed(), name='rss'),
 ]
 
 if settings.DEBUG:

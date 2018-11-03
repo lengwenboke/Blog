@@ -56,7 +56,7 @@
                         </ul>
                     </li>
                 {% endfor %}
-                <li><a href="about.html"><span class="glyphicon glyphicon-user"></span>关于我们</a></li>
+                {#                <li><a href="about.html"><span class="glyphicon glyphicon-user"></span>关于我们</a></li>#}
                 <li><a href="{% url 'comments:friendly' %}"><span class="glyphicon glyphicon-tags"></span>友情链接</a></li>
             </ul>
             <div class="feeds">
@@ -67,7 +67,7 @@
                    target="_blank">
                     <i></i>QQ客服
                 </a>
-                <a class="feed feed-rss" href="" target="_blank">
+                <a class="feed feed-rss" href="{% url 'rss' %}" target="_blank">
                     <i></i>订阅本站
                 </a>
                 <a class="feed feed-weixin" data-toggle="popover" data-trigger="hover" title="微信打赏" data-html="true"

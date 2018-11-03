@@ -32,11 +32,11 @@
                                                                                                          title=""
                                                                                                          target="_blank">{{ post.title }}</a>
     </div>
-    <div class="zambia">
-        <a href="javascript:;" name="zambia" rel="">
-            <span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）
-        </a>
-    </div>
+{#    <div class="zambia">#}
+    {#        <a href="javascript:;" name="zambia" rel="">#}
+    {#            <span class="glyphicon glyphicon-thumbs-up"></span> 赞（0）#}
+    {#        </a>#}
+    {#    </div>#}
     <div class="tags news_tags">
         标签：
         {% for tag in post.tags.all %}
@@ -62,35 +62,35 @@
 
         </span>
     </nav>
-    <div class="content-block related-content visible-lg visible-md">
-        <h2 class="title"><strong>相关推荐</strong></h2>
-        <ul>
-            <li><a target="_blank" href=""><img src="{% static 'images/logo.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/img1.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/img3.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/img2.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/img2.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/img3.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/img1.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-            <li><a target="_blank" href=""><img src="{% static 'images/logo.jpg' %}" alt="">
-                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>
-            </a></li>
-        </ul>
-    </div>
+    {#    <div class="content-block related-content visible-lg visible-md">#}
+    {#        <h2 class="title"><strong>相关推荐</strong></h2>#}
+    {#        <ul>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/logo.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/img1.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/img3.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/img2.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/img2.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/img3.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客,在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/img1.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#            <li><a target="_blank" href=""><img src="{% static 'images/logo.jpg' %}" alt="">#}
+    {#                <h3> 欢迎来到个人技术博客，在这里可以看到网站前端和后端的技术等 </h3>#}
+    {#            </a></li>#}
+    {#        </ul>#}
+    {#    </div>#}
     <div class="content-block comment">
         <h2 class="title"><strong>评论</strong></h2>
         <form action="{% url 'comments:post_comment' post.pk %}" method="post" class="form-inline" id="comment-form">
